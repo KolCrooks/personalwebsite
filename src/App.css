@@ -1,80 +1,24 @@
 .App {
-  background-color: black;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  color: white;
-  font-family: "Roboto Mono", monospace;
-  display: flex;
-  flex-wrap: wrap;
 }
 
-.globe {
-  width: min(calc(100vw * 2 / 3), 100vh);
-  display: flex;
-  align-items: center;
+.fade-enter {
+  opacity: 0.01;
 }
 
-.Info {
-  width: calc(max(calc(100vw / 3), calc(100vw - 100vh)) - 5rem);
-  padding-top: 10vh;
-  z-index: 100;
-  font-size: 5rem;
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
 }
 
-.links {
-  margin-top: 1rem;
-  display: flex;
+.fade-exit {
+  opacity: 1;
 }
 
-.links a {
-  display: block;
-  font-size: 2rem;
-  cursor: pointer;
-  padding: 1rem;
+.fade-exit.fade-exit-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
 }
 
-.links a:hover {
-  font-weight: bold;
-}
-
-.closerMouse {
-  margin: 0;
-  margin-left: 0;
-  transition: margin ease-in-out 30ms;
-}
-
-.closerMouse:hover {
-  margin-left: 1rem;
-}
-
-@media only screen and (max-width: 849px) {
-  .App {
-    justify-content: space-between;
-  }
-  .globe {
-    width: 90vw;
-    height: 90vw;
-  }
-  .Info {
-    padding-top: 0;
-    font-size: 2rem;
-    width: 100%;
-  }
-  .links {
-    flex-direction: row;
-  }
-  .links a {
-    font-size: 1rem;
-  }
-
-  .closerMouse:hover {
-    margin-left: 0rem;
-  }
-}
-
-@media only screen and (min-width: 850px) {
-  .links {
-    flex-direction: column;
-  }
+div.transition-group {
+  position: relative;
 }

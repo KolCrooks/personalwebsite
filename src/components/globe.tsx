@@ -6,13 +6,7 @@ import {
   Mesh,
   MeshNormalMaterial,
   MeshBasicMaterial,
-  SphereGeometry,
   OctahedronGeometry,
-  LineSegments,
-  LineBasicMaterial,
-  Vector3,
-  Geometry,
-  Line,
   PlaneGeometry
 } from "three";
 import SimplexNoise from "simplex-noise";
@@ -20,7 +14,7 @@ import SimplexNoise from "simplex-noise";
 const simplex = new SimplexNoise();
 
 interface globeProps {
-  className: string;
+  className?: string;
 }
 
 let scene: Scene;
@@ -29,11 +23,12 @@ let mesh: Mesh;
 let comp: HTMLDivElement | null;
 let renderer: WebGLRenderer;
 let camera: PerspectiveCamera;
+let ran = false;
 
 const GlobeCanvas: React.FC<globeProps> = props => {
   useEffect(() => {
     renderGlobe();
-  });
+  }, []);
 
   return <div className={props.className} ref={e => (comp = e)}></div>;
 };
@@ -78,7 +73,10 @@ function renderGlobe() {
   scene.add(mesh);
   scene.add(faderMesh);
   renderer.render(scene, camera);
-  requestAnimationFrame(animate);
+  if (!ran) {
+    requestAnimationFrame(animate);
+    ran = true;
+  }
 }
 
 function resize() {

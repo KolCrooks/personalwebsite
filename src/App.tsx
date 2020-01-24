@@ -1,27 +1,30 @@
 import React from "react";
-import Globe from "./globe";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+
+import Main from "./pages/main";
+import Resume from "./pages/resume/resume";
 
 import "./App.css";
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <Globe className="globe"></Globe>
-
-      <div className="Info">
-        Kol Crooks
-        <div className="links">
-          <div className="closerMouse">
-            <a>Résumé</a>
-          </div>
-          <div className="closerMouse">
-            <a>Projects</a>
-          </div>
-          <div className="closerMouse">
-            <a>Github</a>
-          </div>
-        </div>
-      </div>
+      <Router>
+        <TransitionGroup className="transition-group">
+          <CSSTransition timeout={{ exit: 300 }} classNames={"fade"}>
+            <Switch>
+              <Route path="/resume">
+                <Resume />
+              </Route>
+              <Route path="/projects"></Route>
+              <Route path="/" exact>
+                <Main />
+              </Route>
+            </Switch>
+          </CSSTransition>
+        </TransitionGroup>
+      </Router>
     </div>
   );
 };

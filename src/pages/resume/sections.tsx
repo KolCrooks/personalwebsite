@@ -1,6 +1,6 @@
 import React from "react";
 
-export const JS: React.FC = () => {
+export const JSHeader: React.FC = () => {
   return (
     <div>
       <div className="flex-med">
@@ -8,4 +8,13 @@ export const JS: React.FC = () => {
       </div>
     </div>
   );
+};
+
+export const JS_Sections = () => {
+  return [
+    <div>
+      <h3>Overview</h3>
+      Most of my professional experience is with Javascript and Typescript.
+    </div>
+  ];
 };

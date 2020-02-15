@@ -9,7 +9,7 @@ interface PageRoute {
 
 let pages: PageRoute[] = [
   { to: "/", name: "Home" },
-  { to: "/resume", name: "Resume" },
+  { to: "/resume", name: "Resumé" },
   { to: "/projects", name: "Projects" }
 ];
 

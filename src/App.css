@@ -22,3 +22,15 @@
 div.transition-group {
   position: relative;
 }
+
+canvas:focus {
+  outline: none;
+}
+
+canvas:hover {
+  cursor: grab;
+}
+
+canvas:active {
+  cursor: grabbing;
+}

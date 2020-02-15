@@ -13,7 +13,7 @@ const Main: React.FC<{}> = () => {
         Kol Crooks
         <div className="links">
           <div className="closerMouse">
-            <Link to="/resume">Resume</Link>
+            <Link to="/resume">Resumé</Link>
           </div>
           <div className="closerMouse">
             <Link to="/projects">Projects</Link>

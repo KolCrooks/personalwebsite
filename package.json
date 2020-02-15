@@ -25,7 +25,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "echo kolcrooks.com > ./build/CNAME && gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -44,6 +45,8 @@
   },
   "devDependencies": {
     "@types/react-transition-group": "^4.2.3",
-    "@types/three": "^0.103.2"
-  }
+    "@types/three": "^0.103.2",
+    "gh-pages": "^2.2.0"
+  },
+  "homepage": "https://kolcrooks.com"
 }

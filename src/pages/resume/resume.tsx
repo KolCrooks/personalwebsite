@@ -5,7 +5,7 @@ import "./resume.css";
 import NavBar from "../../components/navbar";
 
 import ResumeHeader from "./resumeheader";
-import { JS } from "./sections";
+import { JSHeader } from "./sections";
 
 const Resume: React.FC = () => {
   return (
@@ -13,7 +13,7 @@ const Resume: React.FC = () => {
       <NavBar />
       <ResumeHeader />
       <div className="resumeBody">
-        <JS></JS>
+        <JSHeader></JSHeader>
       </div>
       <div className="viewPDF">View PDF</div>
     </div>

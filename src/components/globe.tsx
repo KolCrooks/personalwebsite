@@ -9,6 +9,8 @@ import {
   OctahedronGeometry,
   PlaneGeometry
 } from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+
 import SimplexNoise from "simplex-noise";
 
 const simplex = new SimplexNoise();
@@ -23,6 +25,8 @@ let mesh: Mesh;
 let comp: HTMLDivElement | null;
 let renderer: WebGLRenderer;
 let camera: PerspectiveCamera;
+let controls: OrbitControls;
+
 let ran = false;
 
 const GlobeCanvas: React.FC<globeProps> = props => {
@@ -35,8 +39,8 @@ const GlobeCanvas: React.FC<globeProps> = props => {
 
 function renderGlobe() {
   if (!comp) return;
-  renderer = new WebGLRenderer({ preserveDrawingBuffer: true });
-  renderer.autoClearColor = false;
+  renderer = new WebGLRenderer();
+  // renderer.autoClearColor = false;
   renderer.setSize(comp.clientWidth, comp.clientWidth);
   renderer.setPixelRatio(1);
   window.addEventListener("resize", resize);
@@ -45,16 +49,6 @@ function renderGlobe() {
   camera = new PerspectiveCamera(45, 1, 1, 500);
   camera.position.set(0, 0, 30);
   camera.lookAt(0, 0, 0);
-
-  let fader = new PlaneGeometry(20, 20, 1, 1);
-
-  var fadeMaterial = new MeshBasicMaterial({
-    color: 0x000000,
-    transparent: true,
-    opacity: 0.05
-  });
-  let faderMesh = new Mesh(fader, fadeMaterial);
-  faderMesh.position.z = 20;
 
   scene = new Scene();
   globe = new OctahedronGeometry(8, 3);
@@ -68,10 +62,21 @@ function renderGlobe() {
   }
 
   var material = new MeshNormalMaterial({ wireframe: true });
-  mesh = new Mesh(globe, [material, new MeshBasicMaterial({ visible: false })]);
+  mesh = new Mesh(globe, material);
 
   scene.add(mesh);
-  scene.add(faderMesh);
+
+  controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  // controls.dampingFactor = 0.1;
+  controls.enableKeys = false;
+  controls.enableZoom = false;
+  controls.enablePan = false;
+  controls.rotateSpeed = 0.5;
+  controls.minPolarAngle = 0;
+  controls.maxPolarAngle = 2 * Math.PI;
+
+  controls.update();
   renderer.render(scene, camera);
   if (!ran) {
     requestAnimationFrame(animate);
@@ -98,7 +103,7 @@ function animate() {
           0.4 * simplex.noise3D(vert.x * 3 + t, vert.y * 3 + t, vert.z * 3 + t)
       );
   }
-
+  controls.update();
   globe.rotateY(0.003);
   globe.rotateX(0.003);
   globe.rotateZ(0.003);

@@ -1,0 +1,36 @@
+.Home {
+  margin: 5% 0%;
+}
+
+.TypingArea {
+  font-family: JetBrainsMono;
+  color: #efefef;
+  margin-left: 10rem;
+  margin-top: 10rem;
+}
+
+.Name {
+  font-size: 5rem;
+}
+
+.carrot-indicator {
+  color: #73c991;
+}
+
+.iam {
+  margin-bottom: 1rem;
+  padding-left: 2rem;
+}
+
+.subHeader {
+  font-size: 1.5rem;
+  color: #ededed;
+  & .links .link-text {
+    color: #ff3030;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

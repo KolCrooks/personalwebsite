@@ -1,12 +1,12 @@
 .Home {
-  margin: 5% 0%;
+  display: flex;
+  flex-direction: row;
 }
 
 .TypingArea {
   font-family: JetBrainsMono;
   color: #efefef;
-  margin-left: 10rem;
-  margin-top: 10rem;
+  padding-top: 10rem;
 }
 
 .Name {

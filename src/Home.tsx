@@ -3,49 +3,24 @@ import "react-typist/dist/Typist.css";
 import "./Home.scss";
 import Typist from "react-typist";
 import { Fade } from "react-awesome-reveal";
+import GameOfLifeComponent from "./GameOfLife";
 
-function App() {
-  const [iamText, setIamText] = useState(false);
+function Home() {
   const [links, setLinks] = useState(false);
   return (
-    <div className="App">
+    <div className="Home">
       <div className="TypingArea">
-        <Typist
-          className="Name"
-          cursor={{
-            element: "_",
-            hideWhenDone: true,
-            hideWhenDoneDelay: 0,
-          }}
-          avgTypingDelay={100}
-          onTypingDone={() => setIamText(true)}
-        >
-          <span>Kol Crooks</span>
-          <Typist.Delay ms={500} />
-        </Typist>
+        <span className="Name">Kol Crooks</span>
         <div className="subHeader">
-          {iamText ? (
-            <Typist
-              className="iam"
-              cursor={{ blink: true, element: "_" }}
-              avgTypingDelay={50}
-              onTypingDone={() => setLinks(true)}
-            >
-              <span>Front End Developer</span>
-              <Typist.Backspace
-                count={"Front End Developer".length}
-                delay={200}
-              />
-              <span>Back End Developer</span>
-              <Typist.Backspace
-                count={"Back End Developer".length}
-                delay={200}
-              />
-              <span>Full Stack Developer</span>
-            </Typist>
-          ) : (
-            <div />
-          )}
+          <Typist
+            className="iam"
+            cursor={{ blink: true, element: "_" }}
+            avgTypingDelay={10}
+            onTypingDone={() => setLinks(true)}
+          >
+            <span>Full Stack Developer</span>
+          </Typist>
+          <div />
           {links ? (
             <Fade cascade className="links">
               <span className="carrot-indicator">
@@ -70,8 +45,11 @@ function App() {
           )}
         </div>
       </div>
+      <div style={{ margin: "auto", width: "50%", height: "50%" }}>
+        <GameOfLifeComponent />
+      </div>
     </div>
   );
 }
 
-export default App;
+export default Home;

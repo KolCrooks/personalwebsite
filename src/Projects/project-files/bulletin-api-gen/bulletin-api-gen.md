@@ -1,14 +1,8 @@
-# Bulletin API Client Generator Tool
-
-?> Unfortunately, the source code for what I am writing about is not available to the public but I will provide snippets where I can.
-
-## Table of Contents
+?> The source code for the server is not available but since this tool was based on an old version, I am able to include the source files for both the tool gen script and the file that it produces.
 
 ## About
 
-A large part of my company's (bulletin) main product is the server's API. This means that for you to develop anything, you had to type of the api routes and try to reference documentation about what those routes are, and what they consume. This was the main motivation for creating the tool. Having to hand write everything and copy type declarations seemed like a recipe for disaster.
-
-note
+A large part of my Bulletin's (my company's) main product is the server's API. For every product, you need the api and had to type of the api routes by looking at the documentation about what those routes are, and what they consume. This was the main motivation for creating the tool. Having to hand write everything for every application that uses the api seemed like a recipe for disaster. The other solution would be to hand write the library. While this was what I was doing before I wrote this, it seemed like there was a better way to do it as most of it was just copy and pasting.
 
 ## Looking at the data
 
@@ -77,13 +71,13 @@ export class User {}
 Next in this loop, we will parse every method. When we parse a method, we:
 
 - Get the name
+- Get the JSDoc comments
 - Parse the decorators for:
   - The path and path variables
   - The REST request type
   - The response type
   - The required permission level
 - Parse the parameters
-- The JSDoc
 
 With all this data, we add the found types to the file that we will emit, and we will also create a method in the output class that has the required data.
 
@@ -109,10 +103,12 @@ This is and example of the output of this step:
   }
 ```
 
-Every controller have each of it's methods parsed to eventually produce the final output file.
+As you can see, I added a `REQUIRES PERMISSION:` statement on the top of the function to inform the user about the required level, and also copied the jsdoc from the original function. It creates the function body from a template that it fills in and includes all the data needed as parameters for the function. The one problem that I wasn't able to solve was getting the correct parameter comments into the output.
 
 ## Conclusion
 
 This tool was very important for the api as it allowed others to easily use api routes that I created. The output file not only looked good, but it also contained all the information that you will need to create applications that used the bulletin API. I am happy to share the output source now because since the creation of this tool, we have moved to a graphql based api as it fits our needs better.
 
-The main output file is too big to display on this page so you can view it [here](https://gist.github.com/KolCrooks/7aa45111e6a78ef82051199f40cf55f0) instead.
+[Script Source](https://gist.github.com/KolCrooks/bcb797bd173b1be9490a2d58187393fe)
+
+[Output File Source](https://gist.github.com/KolCrooks/7aa45111e6a78ef82051199f40cf55f0)

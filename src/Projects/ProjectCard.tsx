@@ -6,12 +6,8 @@ import gfm from "remark-gfm";
 import tableOfContents from "remark-toc";
 import hints from "../util/remark-hint";
 import slug from "remark-slug";
-
-interface ProjectCardProps {
-  imageURL: string;
-  title: string;
-  markdown: string;
-}
+import externLinks from "remark-external-links";
+import { project } from "./project-files";
 
 const renderers = {
   code: (args: { language: string; value: string; node: { meta: string } }) => {
@@ -41,8 +37,15 @@ const renderers = {
         <div className="lightbulb">
           <GoLightBulb />
         </div>
-        {args.children}
+        <div className="hint-content">{args.children}</div>
       </div>
+    );
+  },
+  link: (args: { href: string; children: JSX.Element[] }) => {
+    return (
+      <a href={args.href} target="_blank">
+        {args.children}
+      </a>
     );
   },
   heading: (args: {
@@ -72,13 +75,14 @@ const renderers = {
   },
 };
 
-function ArticleOverlay(props: { clickBack?: () => void; markdown: string }) {
+function ArticleOverlay(props: { clickBack?: () => void; project: project }) {
   const [text, setText] = useState("");
   useEffect(() => {
-    fetch(props.markdown)
+    fetch(props.project.markdown)
       .then((r) => r.text())
       .then((t) => {
-        setText(t);
+        const out = props.project.source_transform?.(t) || t;
+        setText(out);
       });
   });
   return (
@@ -99,12 +103,16 @@ function ArticleOverlay(props: { clickBack?: () => void; markdown: string }) {
         }}
       >
         <div className="article-header">
-          <div className="back-button" onClick={() => props.clickBack?.()}>
-            <GoX />
+          <div className="article-title">
+            <h1>{props.project.title}</h1>
+            <div className="subheader">{props.project.date.toDateString()}</div>
           </div>
+          <h1 className="back-button" onClick={() => props.clickBack?.()}>
+            <GoX />
+          </h1>
         </div>
         <ReactMarkdown
-          plugins={[gfm, tableOfContents, hints, slug]}
+          plugins={[gfm, tableOfContents, hints, slug, externLinks]}
           renderers={renderers}
         >
           {text}
@@ -114,21 +122,18 @@ function ArticleOverlay(props: { clickBack?: () => void; markdown: string }) {
   );
 }
 
-export default function ProjectCard(props: ProjectCardProps) {
+export default function ProjectCard(props: project) {
   const [fullScreen, setFullScreen] = useState(false);
-  const { title, imageURL, markdown } = props;
+  const { image, title } = props;
   const article = fullScreen ? (
-    <ArticleOverlay
-      clickBack={() => setFullScreen(false)}
-      markdown={markdown}
-    />
+    <ArticleOverlay clickBack={() => setFullScreen(false)} project={props} />
   ) : (
     <></>
   );
   return (
     <div className="project-card">
       <div className="card-contents" onClick={() => setFullScreen(true)}>
-        <img src={imageURL} alt={title} className="card-image" />
+        <img src={image} alt={title} className="card-image" />
         <div className="card-title">{title}</div>
       </div>
       {article}

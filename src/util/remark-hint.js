@@ -22,7 +22,7 @@ const map = (tree, iteratee) => {
   return preorder(tree, null, null);
 };
 
-module.exports = () => (tree) => {
+export default () => (tree) => {
   return map(tree, (node) => {
     const { children = [] } = node;
     if (node.type !== "paragraph") {

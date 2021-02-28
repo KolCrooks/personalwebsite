@@ -7,14 +7,7 @@ import projectFiles from "./project-files";
 function Projects() {
   const cards = [];
   for (const file of projectFiles) {
-    cards.push(
-      <ProjectCard
-        title={file.title}
-        imageURL={file.image}
-        markdown={file.markdown}
-        key={file.title}
-      />
-    );
+    cards.push(<ProjectCard {...file} />);
   }
 
   return (

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
   Link,
@@ -14,14 +14,14 @@ import Projects from "./Projects";
 import "./App.scss";
 
 function goToCorrectPage() {
-  switch (window.location.pathname) {
-    case "/":
+  switch (window.location.href.split("/#/")[1]) {
+    case "":
       document.querySelector(".Home")?.scrollIntoView({ block: "end" });
       break;
-    case "/resume":
+    case "resume":
       document.querySelector(".Resume")?.scrollIntoView({ block: "end" });
       break;
-    case "/projects":
+    case "projects":
       document.querySelector(".Projects")?.scrollIntoView({ block: "end" });
       break;
   }

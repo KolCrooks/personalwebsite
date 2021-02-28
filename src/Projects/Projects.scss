@@ -35,20 +35,23 @@
       cursor: pointer;
     }
     .card-title {
-      display: flex;
-      justify-content: center;
+      text-align: center;
       font-family: JetBrainsMono source-code-pro, Menlo, Monaco, Consolas;
     }
   }
   $card-size: 15rem;
+  $chin-size: 3rem;
+  $card-margin: 1rem;
+  font-size: 1rem;
   width: $card-size;
-  height: $card-size + 2rem;
+  height: $card-size + $chin-size;
   background-color: #efefef;
-  margin: 1rem;
+
+  margin: $card-margin;
   border-radius: 5px;
   .card-image {
-    width: calc(100% - 1rem);
-    height: $card-size - 1rem;
+    width: calc(100% - #{$card-margin});
+    height: $card-size - $card-margin;
     margin: 0.5rem;
   }
 }
@@ -90,6 +93,9 @@
     align-items: center;
     justify-content: center;
   }
+  .hint-content {
+    display: block;
+  }
   border: orange solid;
   border-radius: 12px;
   padding: 1rem;
@@ -122,12 +128,23 @@
 
     .article-header {
       width: 100%;
-      font-size: 2rem;
+      margin-bottom: 2rem;
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
       .back-button {
         &:hover {
           cursor: pointer;
+        }
+      }
+      .article-title {
+        h1 {
+          margin-bottom: 0;
+        }
+
+        .subheader {
+          opacity: 0.7;
+          font-size: 1rem;
+          text-indent: 1rem;
         }
       }
     }

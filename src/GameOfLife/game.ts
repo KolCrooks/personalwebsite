@@ -120,7 +120,7 @@ export default class GameOfLife {
         const scale = { scale: 0 };
         new TWEEN.Tween(scale)
           .to({ scale: this.options.cubeSize[0] }, time)
-          .easing(TWEEN.Easing.Circular.InOut)
+          .easing(TWEEN.Easing.Circular.Out)
           .onStart(() => {
             c.visible = true;
             c.scale.set(0, 0, 0);
@@ -140,7 +140,7 @@ export default class GameOfLife {
         const scale = { scale: 1 };
         new TWEEN.Tween(scale)
           .to({ scale: 0 }, time)
-          .easing(TWEEN.Easing.Circular.InOut)
+          .easing(TWEEN.Easing.Circular.Out)
           .onStart(() => {
             c.visible = true;
             c.scale.set(1, 1, 1);

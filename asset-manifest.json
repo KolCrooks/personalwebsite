@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/static/css/main.abbb057b.chunk.css",
-    "main.js": "/static/js/main.e83f97e4.chunk.js",
-    "main.js.map": "/static/js/main.e83f97e4.chunk.js.map",
+    "main.js": "/static/js/main.f4b4d442.chunk.js",
+    "main.js.map": "/static/js/main.f4b4d442.chunk.js.map",
     "react-syntax-highlighter_languages_refractor_abap.js": "/static/js/react-syntax-highlighter_languages_refractor_abap.05b7cb19.chunk.js",
     "react-syntax-highlighter_languages_refractor_abap.js.map": "/static/js/react-syntax-highlighter_languages_refractor_abap.05b7cb19.chunk.js.map",
     "react-syntax-highlighter_languages_refractor_actionscript.js": "/static/js/react-syntax-highlighter_languages_refractor_actionscript.be6b64c3.chunk.js",
@@ -321,7 +321,7 @@
     "static/media/ASL_ML_PAPER.10fcd36c.pdf": "/static/media/ASL_ML_PAPER.10fcd36c.pdf",
     "static/media/accuracy.83270a73.png": "/static/media/accuracy.83270a73.png",
     "static/media/accuracy_v_loss.f14c7914.png": "/static/media/accuracy_v_loss.f14c7914.png",
-    "static/media/asl-classification.b70f28de.md": "/static/media/asl-classification.b70f28de.md",
+    "static/media/asl-classification.1b951676.md": "/static/media/asl-classification.1b951676.md",
     "static/media/base.7909a18f.jpg": "/static/media/base.7909a18f.jpg",
     "static/media/bulletin-api-gen.392d3930.md": "/static/media/bulletin-api-gen.392d3930.md",
     "static/media/bulletin_pin.23df43b5.svg": "/static/media/bulletin_pin.23df43b5.svg",
@@ -335,6 +335,6 @@
     "static/css/153.80178d92.chunk.css",
     "static/js/153.a18b6d20.chunk.js",
     "static/css/main.abbb057b.chunk.css",
-    "static/js/main.e83f97e4.chunk.js"
+    "static/js/main.f4b4d442.chunk.js"
   ]
 }

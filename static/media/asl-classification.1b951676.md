@@ -49,4 +49,4 @@ The server side of this was written in C# and loaded in the NN that was trained 
 
 ## Source Code
 
-If you are interested in the source code for this project you can view it [here](https://github.com/KolCrooks/signLanguageDetection). Sorry that it is messy, I didn't follow good coding standards at the time.
+If you are interested in the source code for this project you can view it [here](https://github.com/KolCrooks/signLanguageDetection).

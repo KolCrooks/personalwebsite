@@ -41,7 +41,7 @@ Looking back, we should have probably included a no sign class so that there was
 
 ![accuracy vs loss](%accuracy_v_loss.png%)
 
-If we had more data to raise the epoch count without overfitting the data, and drive the loss further down, and make the accuracy more consistent.
+If we had more data, we could raise the epoch count without overfitting the data. This would drive the loss further down, and make the accuracy more consistent.
 
 ## The Server and the Client
 

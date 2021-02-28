@@ -6,7 +6,7 @@ const exp: project = {
   markdown,
   title: "Bulletin API Client Generation Tool",
   image: img,
-  date: new Date(2021, 2, 27),
+  date: new Date(2021, 2, 28),
 };
 
 export default exp;

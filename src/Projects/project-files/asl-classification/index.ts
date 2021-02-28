@@ -26,8 +26,9 @@ const exp: project = {
       .replace("%processing/segmented.jpg%", segmented);
     return out;
   },
+  star: true,
   image: segmented,
-  date: new Date(2021, 2, 28),
+  date: new Date(2021, 2, 27),
 };
 
 export default exp;

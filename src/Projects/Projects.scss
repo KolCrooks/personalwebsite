@@ -7,14 +7,14 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #d6dee1;
+  background-color: #3f3f3f;
   border-radius: 20px;
   border: 6px solid transparent;
   background-clip: content-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #a8bbbf;
+  background-color: #5f5f5f;
 }
 
 .projects-content {
@@ -46,13 +46,31 @@
   width: $card-size;
   height: $card-size + $chin-size;
   background-color: #efefef;
-
+  position: relative;
   margin: $card-margin;
   border-radius: 5px;
   .card-image {
     width: calc(100% - #{$card-margin});
     height: $card-size - $card-margin;
     margin: 0.5rem;
+  }
+
+  .card-star {
+    color: gold;
+    font-size: 1.5rem;
+    position: absolute;
+    right: 0.1rem;
+    top: 0.1rem;
+    background-color: #efefef;
+    border-radius: 50%;
+    border-color: #222222;
+    border-style: dashed;
+    height: 2rem;
+    width: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -104,7 +122,7 @@
 .article-container {
   --code-bcolor: black;
   --code-tcolor: #e06c75;
-  animation: fadeIn-background 0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  animation: fadeIn-background 100ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
   animation-iteration-count: 1;
   width: 100vw;
   height: 100vh;
@@ -116,7 +134,7 @@
   overflow-y: auto;
 
   .article-content {
-    animation: fadeIn-opacity 0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    animation: fadeIn-opacity 100ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
 
     opacity: 1;
     width: calc(70% - 4rem);

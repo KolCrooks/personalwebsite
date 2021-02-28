@@ -22,6 +22,7 @@ const map = (tree, iteratee) => {
   return preorder(tree, null, null);
 };
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default () => (tree) => {
   return map(tree, (node) => {
     const { children = [] } = node;

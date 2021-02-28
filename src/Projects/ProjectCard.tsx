@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { GoX, GoLightBulb } from "react-icons/go";
+import { GoX, GoLightBulb, GoStar } from "react-icons/go";
 import ReactMarkdown from "react-markdown";
 import { CodeBlock, atomOneDark } from "react-code-blocks";
 import gfm from "remark-gfm";
@@ -43,7 +43,7 @@ const renderers = {
   },
   link: (args: { href: string; children: JSX.Element[] }) => {
     return (
-      <a href={args.href} target="_blank">
+      <a href={args.href} target="_blank" rel="noreferrer">
         {args.children}
       </a>
     );
@@ -133,6 +133,13 @@ export default function ProjectCard(props: project) {
   return (
     <div className="project-card">
       <div className="card-contents" onClick={() => setFullScreen(true)}>
+        {props.star ? (
+          <div className="card-star">
+            <GoStar />
+          </div>
+        ) : (
+          <></>
+        )}
         <img src={image} alt={title} className="card-image" />
         <div className="card-title">{title}</div>
       </div>

@@ -1,6 +1,5 @@
 import React from "react";
 
-import { useEffect, useRef } from "react";
 import GameOfLife from "./game";
 
 export default class GameOfLifeComponent extends React.Component {

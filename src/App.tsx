@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
-  Redirect,
   useLocation,
-  useParams,
 } from "react-router-dom";
 import { useSpring, animated } from "react-spring";
 
@@ -15,6 +13,19 @@ import Resume from "./Resume";
 import Projects from "./Projects";
 import "./App.scss";
 
+function goToCorrectPage() {
+  switch (window.location.pathname) {
+    case "/":
+      document.querySelector(".Home")?.scrollIntoView({ block: "end" });
+      break;
+    case "/resume":
+      document.querySelector(".Resume")?.scrollIntoView({ block: "end" });
+      break;
+    case "/projects":
+      document.querySelector(".Projects")?.scrollIntoView({ block: "end" });
+      break;
+  }
+}
 function Dot() {
   const location = useLocation();
   let pos = 0;
@@ -50,12 +61,81 @@ function Container() {
 
 function App() {
   useEffect(() => {
+    let visible = false;
+    const visibilityObserver = new IntersectionObserver(
+      (entries) => {
+        let [entry] = entries;
+        if (entry.isIntersecting) {
+          visible = true;
+        } else {
+          visible = false;
+        }
+      },
+      { threshold: 1 }
+    );
+    const projectsEl = document.querySelector(".Projects");
+    if (projectsEl) visibilityObserver.observe(projectsEl);
+
     document
       .querySelector(".router-contents")
       ?.addEventListener("mousewheel", (e) => {
         e.preventDefault();
       });
+    document
+      .querySelector(".projects-content")
+      ?.addEventListener("mousewheel", (e) => {
+        if (visible) e.stopPropagation();
+      });
+    goToCorrectPage();
+
+    window.addEventListener("resize", () => {
+      goToCorrectPage();
+    });
   });
+  const links = (
+    <div className="links">
+      <Link
+        to={"/"}
+        className="Home-Link"
+        onClick={() =>
+          document
+            .querySelector(".Home")
+            ?.scrollIntoView({ behavior: "smooth", block: "end" })
+        }
+      >
+        Home
+      </Link>
+      <Link
+        to={"/resume"}
+        className="Resume-Link"
+        onClick={() =>
+          document
+            .querySelector(".Resume")
+            ?.scrollIntoView({ behavior: "smooth", block: "end" })
+        }
+      >
+        Resume
+      </Link>
+      <Link
+        to={"/projects"}
+        className="Project-Link"
+        onClick={() =>
+          document
+            .querySelector(".Projects")
+            ?.scrollIntoView({ behavior: "smooth", block: "end" })
+        }
+      >
+        Projects
+      </Link>
+    </div>
+  );
+  const routerContents = (
+    <Switch>
+      <Route path="/resume" component={Container}></Route>
+      <Route path="/projects" component={Container}></Route>
+      <Route path="/" component={Container}></Route>
+    </Switch>
+  );
   return (
     <div className="App">
       <Router>
@@ -64,67 +144,9 @@ function App() {
             <div className="dot-container">
               <Dot />
             </div>
-            <div className="links">
-              <Link
-                to={"/"}
-                className="Home-Link"
-                onClick={() =>
-                  document
-                    .querySelector(".Home")
-                    ?.scrollIntoView({ behavior: "smooth", block: "end" })
-                }
-              >
-                Home
-              </Link>
-              <Link
-                to={"/resume"}
-                className="Resume-Link"
-                onClick={() =>
-                  document
-                    .querySelector(".Resume")
-                    ?.scrollIntoView({ behavior: "smooth", block: "end" })
-                }
-              >
-                Resume
-              </Link>
-              <Link
-                to={"/projects"}
-                className="Project-Link"
-                onClick={() =>
-                  document
-                    .querySelector(".Projects")
-                    ?.scrollIntoView({ behavior: "smooth", block: "end" })
-                }
-              >
-                Projects
-              </Link>
-            </div>
+            {links}
           </div>
-          <div className="router-contents">
-            <Switch>
-              <Route
-                path="/resume"
-                component={Container}
-                onEnter={() =>
-                  document.querySelector(".Resume")?.scrollIntoView()
-                }
-              ></Route>
-              <Route
-                path="/projects"
-                component={Container}
-                onEnter={() =>
-                  document.querySelector(".Projects")?.scrollIntoView()
-                }
-              ></Route>
-              <Route
-                path="/"
-                component={Container}
-                onEnter={() =>
-                  document.querySelector(".Home")?.scrollIntoView()
-                }
-              ></Route>
-            </Switch>
-          </div>
+          <div className="router-contents">{routerContents}</div>
         </div>
       </Router>
     </div>

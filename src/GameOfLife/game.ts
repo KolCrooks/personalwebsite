@@ -1,6 +1,6 @@
+import * as TWEEN from "@tweenjs/tween.js";
 import * as THREE from "three";
 import { AmbientLight } from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { doGameOfLife, to3D, WorldSettings, WorldState } from "./helper";
 
 export default class GameOfLife {
@@ -8,7 +8,7 @@ export default class GameOfLife {
   options: WorldSettings = {
     size: [10, 10, 10],
     cubeSize: [1, 1, 1],
-    stepTime: 200,
+    stepTime: 3000,
   };
 
   worldState: WorldState = {
@@ -76,7 +76,6 @@ export default class GameOfLife {
 
     this.scene.add(pointLight);
     this.scene.add(light);
-    console.log("AAAAA");
     this.tick();
   }
 
@@ -92,26 +91,71 @@ export default class GameOfLife {
       this.renderer.domElement.clientHeight;
     this.camera.updateProjectionMatrix();
   }
-
+  lastTime: number = 0;
   public tick(time = 0) {
     requestAnimationFrame(this.tick.bind(this));
+    TWEEN.update(time);
+    const delta = time - this.lastTime;
+    this.lastTime = time;
+
     this.camera.position.set(
       Math.sin(time * 0.0005) * this.options.size[0] * 2,
       this.options.size[1],
       Math.cos(time * 0.0005) * this.options.size[2] * 2
     );
     this.camera.lookAt(0, 0, 0);
-    this.worldState.time++;
-    if (this.worldState.time % this.options.stepTime !== 0) {
+    this.worldState.time += delta;
+
+    if (this.worldState.time <= this.options.stepTime) {
       this.renderer.render(this.scene, this.camera);
       return;
     }
     const newState = doGameOfLife(this.worldState.cubes, this.options.size);
     for (const c of this.scene.children) {
       if (c.userData.i === undefined) continue;
-      c.visible = !!newState[c.userData.i];
+      const time = this.options.stepTime * 0.25;
+
+      if (!!newState[c.userData.i] && !this.worldState.cubes[c.userData.i]) {
+        // Now Alive
+        const scale = { scale: 0 };
+        new TWEEN.Tween(scale)
+          .to({ scale: this.options.cubeSize[0] }, time)
+          .easing(TWEEN.Easing.Circular.InOut)
+          .onStart(() => {
+            c.visible = true;
+            c.scale.set(0, 0, 0);
+          })
+          .onUpdate(() => {
+            c.scale.set(scale.scale, scale.scale, scale.scale);
+          })
+          .onComplete(() => {
+            c.visible = !!newState[c.userData.i];
+          })
+          .start();
+      } else if (
+        !newState[c.userData.i] &&
+        !!this.worldState.cubes[c.userData.i]
+      ) {
+        // Now Dead
+        const scale = { scale: 1 };
+        new TWEEN.Tween(scale)
+          .to({ scale: 0 }, time)
+          .easing(TWEEN.Easing.Circular.InOut)
+          .onStart(() => {
+            c.visible = true;
+            c.scale.set(1, 1, 1);
+          })
+          .onUpdate(() => {
+            c.scale.set(scale.scale, scale.scale, scale.scale);
+          })
+          .onComplete(() => {
+            c.visible = false;
+          })
+          .start();
+      }
     }
     this.worldState.cubes = newState;
     this.renderer.render(this.scene, this.camera);
+    this.worldState.time = 0;
   }
 }

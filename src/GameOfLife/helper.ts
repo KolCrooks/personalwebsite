@@ -9,6 +9,17 @@ export interface WorldState {
   time: number;
 }
 
+export function isInViewport(element: HTMLElement) {
+  const rect = element.getBoundingClientRect();
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <=
+      (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+}
+
 export function to1D(
   pos: [x: number, y: number, z: number],
   dims: [max_x: number, max_y: number, max_z: number]

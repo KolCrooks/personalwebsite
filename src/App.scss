@@ -47,14 +47,9 @@
     padding-left: 15rem;
     height: 100vh;
     max-height: 100vh;
-  }
-
-  & > div:nth-child(even) {
-    background-color: black;
-  }
-  & > div:nth-child(odd) {
     background-color: #222222;
   }
+
   // Scrollbar stuff
   overflow-y: scroll;
   overscroll-behavior: contain;

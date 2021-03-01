@@ -1,7 +1,13 @@
 import * as TWEEN from "@tweenjs/tween.js";
 import * as THREE from "three";
 import { AmbientLight } from "three";
-import { doGameOfLife, to3D, WorldSettings, WorldState } from "./helper";
+import {
+  doGameOfLife,
+  to3D,
+  WorldSettings,
+  WorldState,
+  isInViewport,
+} from "./helper";
 
 export default class GameOfLife {
   renderer: THREE.WebGLRenderer;
@@ -94,6 +100,8 @@ export default class GameOfLife {
   lastTime: number = 0;
   public tick(time = 0) {
     requestAnimationFrame(this.tick.bind(this));
+    if (!this.ref || !isInViewport(this.ref)) return;
+
     TWEEN.update(time);
     const delta = time - this.lastTime;
     this.lastTime = time;

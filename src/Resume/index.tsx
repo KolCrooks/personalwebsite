@@ -32,7 +32,7 @@ function ResumeOverview() {
         <li>Javascript/NodeJS/Typescript</li>
         <ul>
           <li>Extensive experience with React/Vue</li>
-          <li>REST and GraphQL API usage and design</li>
+          <li>Experience with REST and GraphQL API usage and design</li>
         </ul>
         <li>Java</li>
         <li>
@@ -42,7 +42,7 @@ function ResumeOverview() {
           </ul>
         </li>
       </ul>
-      <h4>knowledge of:</h4>
+      <h4>Knowledge of:</h4>
       C++, MATLAB, R, GO
     </div>
   );

@@ -3,6 +3,7 @@ import "react-typist/dist/Typist.css";
 import ProjectCard from "./ProjectCard";
 import "./Projects.scss";
 import projectFiles from "./project-files";
+import { useLocation } from "react-router-dom";
 
 function Projects() {
   const cards = [];

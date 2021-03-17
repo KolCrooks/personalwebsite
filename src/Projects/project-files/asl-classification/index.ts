@@ -10,6 +10,7 @@ import segmented from "./processing/segmented.jpg";
 
 import accuracy from "./accuracy.png";
 import accuracyVLoss from "./accuracy_v_loss.png";
+import { ProjectTags } from "../ProjectTags";
 
 const exp: project = {
   markdown,
@@ -26,7 +27,13 @@ const exp: project = {
       .replace("%processing/segmented.jpg%", segmented);
     return out;
   },
-  star: true,
+  tags: [
+    ProjectTags.CSHARP,
+    ProjectTags.PYTHON,
+    ProjectTags.MACHINE_LEARNING,
+    ProjectTags.STAR,
+  ],
+  github: "https://github.com/KolCrooks/signLanguageDetection",
   image: segmented,
   date: new Date(2021, 2, 27),
 };

@@ -1,24 +1,37 @@
 import { useEffect, useState } from "react";
 import { GoX, GoLightBulb, GoStar } from "react-icons/go";
+
 import ReactMarkdown from "react-markdown";
 import { CodeBlock, atomOneDark } from "react-code-blocks";
+import ReactJson from "react-json-view";
+
 import gfm from "remark-gfm";
 import tableOfContents from "remark-toc";
 import hints from "../util/remark-hint";
 import slug from "remark-slug";
 import externLinks from "remark-external-links";
 import { project } from "./project-files";
+import { ProjectTagElement, ProjectTags } from "./project-files/ProjectTags";
+import { IoLogoGithub } from "react-icons/io5";
 
 const renderers = {
   code: (args: { language: string; value: string; node: { meta: string } }) => {
-    return (
-      <div className="code">
-        <div
-          className="code-header"
-          style={{ backgroundColor: atomOneDark.backgroundColor }}
-        >
-          {args.node.meta}
-        </div>
+    let codeArea;
+    if (args.language.toLowerCase() === "json") {
+      codeArea = (
+        <ReactJson
+          src={JSON.parse(args.value)}
+          // collapsed
+          shouldCollapse={(field) => {
+            return field.name !== "root";
+          }}
+          enableClipboard={false}
+          theme={"chalk"}
+          style={{ padding: "1rem" }}
+        />
+      );
+    } else {
+      codeArea = (
         <CodeBlock
           theme={atomOneDark}
           language={args.language}
@@ -28,6 +41,17 @@ const renderers = {
             backgroundColor: atomOneDark.backgroundColor,
           }}
         />
+      );
+    }
+    return (
+      <div className="code">
+        <div
+          className="code-header"
+          style={{ backgroundColor: atomOneDark.backgroundColor }}
+        >
+          {args.node.meta}
+        </div>
+        {codeArea}
       </div>
     );
   },
@@ -102,6 +126,19 @@ function ArticleOverlay(props: { clickBack?: () => void; project: project }) {
           e.stopPropagation();
         }}
       >
+        {props.project.github ? (
+          <a
+            href={props.project.github}
+            target="_blank"
+            rel="noreferrer"
+            className="github-link"
+          >
+            <div className="vog">View On Github</div>
+            <IoLogoGithub />
+          </a>
+        ) : (
+          <></>
+        )}
         <div className="article-header">
           <div className="article-title">
             <h1>{props.project.title}</h1>
@@ -130,16 +167,18 @@ export default function ProjectCard(props: project) {
   ) : (
     <></>
   );
+  const tagElements = props.tags?.map((t) => <ProjectTagElement tag={t} />);
   return (
     <div className="project-card">
       <div className="card-contents" onClick={() => setFullScreen(true)}>
-        {props.star ? (
+        {props.tags?.includes(ProjectTags.STAR) ? (
           <div className="card-star">
             <GoStar />
           </div>
         ) : (
           <></>
         )}
+        <div className="card-tags">{tagElements}</div>
         <img src={image} alt={title} className="card-image" />
         <div className="card-title">{title}</div>
       </div>

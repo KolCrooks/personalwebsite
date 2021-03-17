@@ -34,6 +34,10 @@ function ResumeOverview() {
           <li>Extensive experience with React/Vue</li>
           <li>Experience with REST and GraphQL API usage and design</li>
         </ul>
+        <li>
+          Python
+          <ul>Experience with Tensorflow</ul>
+        </li>
         <li>Java</li>
         <li>
           C#
@@ -177,7 +181,7 @@ function ResumeEducation() {
 }
 
 function TabsBar(props: { tab: TABS; tabClicked: (tab: TABS) => void }) {
-  const [_, forceUpdate] = useReducer((x) => x + 1, 0);
+  const [, forceUpdate] = useReducer((x) => x + 1, 0);
 
   const { tab } = props;
   const experienceRef = useRef(null);

@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/static/css/main.f2ecc542.chunk.css",
-    "main.js": "/static/js/main.6adf6534.chunk.js",
-    "main.js.map": "/static/js/main.6adf6534.chunk.js.map",
+    "main.js": "/static/js/main.e62f6afd.chunk.js",
+    "main.js.map": "/static/js/main.e62f6afd.chunk.js.map",
     "react-syntax-highlighter_languages_refractor_abap.js": "/static/js/react-syntax-highlighter_languages_refractor_abap.3b8fd72b.chunk.js",
     "react-syntax-highlighter_languages_refractor_abap.js.map": "/static/js/react-syntax-highlighter_languages_refractor_abap.3b8fd72b.chunk.js.map",
     "react-syntax-highlighter_languages_refractor_actionscript.js": "/static/js/react-syntax-highlighter_languages_refractor_actionscript.05060223.chunk.js",
@@ -332,7 +332,7 @@
     "static/media/csharp-original.svg": "/static/media/csharp-original.7ce1ad6d.svg",
     "static/media/diagram.93c5a1bc.svg": "/static/media/diagram.93c5a1bc.svg",
     "static/media/graphql-icon.e335785b.svg": "/static/media/graphql-icon.e335785b.svg",
-    "static/media/graphql-server.cfed3639.md": "/static/media/graphql-server.cfed3639.md",
+    "static/media/graphql-server.827e7b60.md": "/static/media/graphql-server.827e7b60.md",
     "static/media/grey.f1fec6e0.jpg": "/static/media/grey.f1fec6e0.jpg",
     "static/media/groundwrk.92a7019a.md": "/static/media/groundwrk.92a7019a.md",
     "static/media/groundwrk_assignments.56557efd.png": "/static/media/groundwrk_assignments.56557efd.png",
@@ -352,6 +352,6 @@
     "static/css/153.80178d92.chunk.css",
     "static/js/153.1b3b7379.chunk.js",
     "static/css/main.f2ecc542.chunk.css",
-    "static/js/main.6adf6534.chunk.js"
+    "static/js/main.e62f6afd.chunk.js"
   ]
 }

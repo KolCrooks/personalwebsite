@@ -27,9 +27,9 @@ After thinking about it for a while, I came up with this design:
 To explain the image: I have a basic C# httplistener take requests and then send the requests to a thread pool. This thread pool will spawn a thread for each request, allowing for a large number of requests to be processed at once. Each thread will use a parser to transform the request string into a node tree that contains information about each node, and then the fields inside each of those nodes.
 An example is to look at this query:
 
-```GraphQL
+```graphql
 {
-  Country(Id: ID){
+  Country(Id: ID) {
     Number
     Towns {
       Name
@@ -224,7 +224,7 @@ Controllers are classes that contain queries related to a specific type.
 
 Consider the class Country and Town:
 
-```CSharp
+```cs
    public class Town
    {
       public string Name { get; set; }
@@ -243,7 +243,7 @@ Consider the class Country and Town:
 
 We can make a controller for country easily by doing this:
 
-```CSharp
+```cs
    [GQLController(type = typeof(Country))]
    public class CountryController : GraphQLController
    {
@@ -260,7 +260,7 @@ We can make a controller for country easily by doing this:
 
 Making the request:
 
-```GraphQL
+```graphql
 {
   Country(Id: ID)
 }
@@ -268,8 +268,8 @@ Making the request:
 
 or
 
-```GraphQL
-query getCountry($Id: ID){
+```graphql
+query getCountry($Id: ID) {
   Country
 }
 ```
@@ -278,18 +278,18 @@ Will produce the country with that id. But lets say that `Towns` is actually sto
 
 We can make so that `getCountry()` only returns a portion of the Country so that this query:
 
-```GraphQL
+```graphql
 {
-  Country(Id: ID){
-     Number
-     Id
+  Country(Id: ID) {
+    Number
+    Id
   }
 }
 ```
 
 Only returns the country with the ID and Number. We then put towns in it's own method called a field resolver:
 
-```CSharp
+```cs
    [FieldResolver(Name = "Towns")]
    public Town[] Towns([Root] Country root)
    {
@@ -306,7 +306,7 @@ The final method type in these controllers are `mutations`
 
 Here is what that would look like:
 
-```CSharp
+```cs
    [Mutation(Name = "addCountry")]
    public Country addCountry([Arg("Id", typeof(GraphQLTypeIntrinsic.ID))]
       string Id,
@@ -321,11 +321,9 @@ Here is what that would look like:
 
 Where mutation request like this would resolve to it:
 
-```GraphQL
-{
-  addCountry($Id: ID, $number:Int){
-    Country
-  }
+```graphql
+query addCountry($Id: ID, $number: Int) {
+  Country
 }
 ```
 
@@ -333,9 +331,9 @@ All this together creates an effective system that allows fast execution of requ
 
 When I benchmarked the program, it was able to processing 10,000 of these query requests in ~1850ms on a Ryzen 9 5900X:
 
-```GraphQL
+```graphql
 {
-  Country(Id: ID){
+  Country(Id: ID) {
     Number
     Towns {
       Name

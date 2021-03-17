@@ -8,7 +8,7 @@ import groundwrk_users from "./groundwrk_stats.png";
 import { ProjectTags } from "../ProjectTags";
 
 const exp: project = {
-  date: new Date(2021, 28, 2),
+  date: new Date(2021, 2, 28),
   markdown,
   title: "Groundwrk (App)",
   image: logo,

@@ -6,7 +6,7 @@ import GQLServerDesign from "./GQLServerDesign.png";
 import { ProjectTags } from "../ProjectTags";
 
 const exp: project = {
-  date: new Date(2021, 16, 3),
+  date: new Date(2021, 3, 16),
   markdown,
   title: "Custom C# GraphQL Server",
   image: logo,

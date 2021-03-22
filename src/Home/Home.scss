@@ -1,3 +1,19 @@
+@media (max-width: 1150px) {
+  .Home {
+    flex-direction: column !important;
+  }
+
+  .game-of-life {
+    width: 100% !important;
+  }
+}
+
+.game-of-life {
+  margin: auto;
+  width: 50%;
+  height: 50%;
+}
+
 .Home {
   display: flex;
   flex-direction: row;

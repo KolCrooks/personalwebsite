@@ -32,6 +32,7 @@ $filters-height: 5rem;
 }
 
 .project-tag-filters {
+  user-select: none;
   &::before {
     content: "";
     height: $filters-height;

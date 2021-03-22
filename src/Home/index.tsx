@@ -35,7 +35,7 @@ function Home() {
           </div>
         </div>
       </div>
-      <div style={{ margin: "auto", width: "50%", height: "50%" }}>
+      <div className="game-of-life">
         <GameOfLifeComponent />
       </div>
     </div>

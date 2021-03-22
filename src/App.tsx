@@ -12,6 +12,8 @@ import Home from "./Home";
 import Resume from "./Resume";
 import Projects from "./Projects";
 import "./App.scss";
+import { useMediaQuery } from "react-responsive";
+import { IoMenu } from "react-icons/io5";
 
 function goToCorrectPage() {
   switch (window.location.href.split("/#/")[1]) {
@@ -60,6 +62,9 @@ function Container() {
 }
 
 function App() {
+  const isMobile = useMediaQuery({ query: `(max-width: 900px)` });
+
+  // Setup page scrolling
   useEffect(() => {
     let visible = false;
     const visibilityObserver = new IntersectionObserver(
@@ -73,6 +78,7 @@ function App() {
       },
       { threshold: 1 }
     );
+
     const projectsEl = document.querySelector(".Projects");
     if (projectsEl) visibilityObserver.observe(projectsEl);
 
@@ -92,6 +98,8 @@ function App() {
       goToCorrectPage();
     });
   });
+
+  // Setup the links section
   const links = (
     <div className="links">
       <Link
